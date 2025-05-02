@@ -1,0 +1,74 @@
+syntax = "proto3";
+package user;
+
+option go_package = "github.com/sergeyreshetnyakov/social-protos";
+
+service User {
+    rpc Login (LoginRequest) returns (LoginResponse);
+    rpc Register (RegisterRequest) returns (RegisterResponse);
+    rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse);
+    rpc FindUser (GetUserByIdRequest) returns (GetUserByIdResponse);
+    rpc UpdateProfileImage (UpdateProfileImageRequest) returns (UpdateProfileImageResponse);
+    rpc UpdateProfileDescription (UpdateProfileDescriptionRequest) returns (UpdateProfileDescriptionResponse);
+    rpc ChangePassword (ChangePasswordRequest) returns (ChangePasswordResponse);
+}
+
+message Image {
+    int32 width = 1;
+    int32 height = 2;
+    bytes image_data = 3;
+}
+
+message LoginRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message LoginResponse {
+    string token = 1;
+}
+
+message RegisterRequest {
+    string username = 1;
+    string email = 2;
+    string password = 3;
+    optional string description = 4;
+    optional Image profile_image = 5;
+}
+
+message RegisterResponse {
+    int64 user_id = 1;
+}
+
+message GetUserByIdRequest {
+    int64 user_id =1;
+}
+
+message GetUserByIdResponse {
+    string username = 1;
+}
+
+message UpdateProfileImageRequest {
+    Image profile_image = 1;
+}
+
+message UpdateProfileImageResponse {
+    int64 user_id = 1;
+}
+
+message UpdateProfileDescriptionRequest {
+    string description = 1;
+}
+
+message UpdateProfileDescriptionResponse {
+    int64 user_id = 1;
+}
+
+message ChangePasswordRequest {
+    string password = 1;
+    int64 user_id = 2;
+}
+
+message ChangePasswordResponse {
+    string password = 1;
+}

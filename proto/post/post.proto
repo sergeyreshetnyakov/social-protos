@@ -1,0 +1,83 @@
+syntax = "proto3";
+package post;
+
+option go_package = "github.com/sergeyreshetnyakov/social-protos";
+
+service Post {
+    rpc GetAllPosts (GetAllPostsRequest) returns (stream GetAllPostsResponse);
+    rpc GetPostById (GetPostByIdRequest) returns (GetPostByIdResponse);
+    rpc GetPostByUser (GetPostByUserRequest) returns (stream GetPostByUserResponse);
+    rpc FindPost (FindPostRequest) returns (FindPostResponse);
+    rpc AddPost (AddPostRequest) returns (AddPostResponse);
+    rpc ChangePostRating (ChangePostRatingRequest) returns (ChangePostRatingResponse);
+    rpc DeletePost (DeletePostRequest) returns (DeletePostResponse);
+}
+
+message GetAllPostsRequest {}
+
+message GetAllPostsResponse {
+    string title = 1;
+    string content = 2;
+    string author = 3;
+    int64 post_id = 4;
+    repeated string rating = 5;
+}
+
+message GetPostByIdRequest {
+    int64 post_id = 1;
+}
+
+message GetPostByIdResponse {
+    string title = 1;
+    string content = 2;
+    string author = 3;
+    int64 post_id = 4;
+    repeated string rating = 5;
+}
+message GetPostByUserRequest {
+    int64 user_id = 1;
+}
+
+message GetPostByUserResponse {
+    string title = 1;
+    string content = 2;
+    string author = 3;
+    int64 post_id = 4;
+    repeated string rating = 5;
+}
+
+message FindPostRequest {
+    string query = 1;
+    int32 page_number = 2;
+    int32 results_per_page = 3;
+}
+
+message FindPostResponse {
+    repeated string title = 1;
+    repeated int64 post_id = 2;
+}
+
+message AddPostRequest {
+    string title = 1;
+    string content = 2;
+}
+
+message AddPostResponse {
+    int64 post_id = 1;
+}
+
+message ChangePostRatingRequest {
+    int64 post_id = 1;
+}
+
+message ChangePostRatingResponse {
+    repeated string rating = 1;
+}
+
+message DeletePostRequest {
+    int64 post_id = 1;
+}
+
+message DeletePostResponse {
+    int64 post_id = 1;
+}
