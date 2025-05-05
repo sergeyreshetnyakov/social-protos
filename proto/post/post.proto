@@ -1,7 +1,5 @@
 syntax = "proto3";
-package post;
-
-option go_package = "github.com/sergeyreshetnyakov/social-protos";
+option go_package = "/post";
 
 service Post {
     rpc GetAllPosts (GetAllPostsRequest) returns (stream GetAllPostsResponse);

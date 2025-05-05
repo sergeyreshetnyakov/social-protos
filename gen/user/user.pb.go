@@ -4,7 +4,7 @@
 // 	protoc        v5.29.3
 // source: proto/user/user.proto
 
-package social_protos
+package user
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -661,7 +661,7 @@ var File_proto_user_user_proto protoreflect.FileDescriptor
 
 const file_proto_user_user_proto_rawDesc = "" +
 	"\n" +
-	"\x15proto/user/user.proto\x12\x04user\"T\n" +
+	"\x15proto/user/user.proto\"T\n" +
 	"\x05Image\x12\x14\n" +
 	"\x05width\x18\x01 \x01(\x05R\x05width\x12\x16\n" +
 	"\x06height\x18\x02 \x01(\x05R\x06height\x12\x1d\n" +
@@ -671,13 +671,13 @@ const file_proto_user_user_proto_rawDesc = "" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\"%\n" +
 	"\rLoginResponse\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"\xdf\x01\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"\xda\x01\n" +
 	"\x0fRegisterRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x03 \x01(\tR\bpassword\x12%\n" +
-	"\vdescription\x18\x04 \x01(\tH\x00R\vdescription\x88\x01\x01\x125\n" +
-	"\rprofile_image\x18\x05 \x01(\v2\v.user.ImageH\x01R\fprofileImage\x88\x01\x01B\x0e\n" +
+	"\vdescription\x18\x04 \x01(\tH\x00R\vdescription\x88\x01\x01\x120\n" +
+	"\rprofile_image\x18\x05 \x01(\v2\x06.ImageH\x01R\fprofileImage\x88\x01\x01B\x0e\n" +
 	"\f_descriptionB\x10\n" +
 	"\x0e_profile_image\"+\n" +
 	"\x10RegisterResponse\x12\x17\n" +
@@ -685,9 +685,9 @@ const file_proto_user_user_proto_rawDesc = "" +
 	"\x12GetUserByIdRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\"1\n" +
 	"\x13GetUserByIdResponse\x12\x1a\n" +
-	"\busername\x18\x01 \x01(\tR\busername\"M\n" +
-	"\x19UpdateProfileImageRequest\x120\n" +
-	"\rprofile_image\x18\x01 \x01(\v2\v.user.ImageR\fprofileImage\"5\n" +
+	"\busername\x18\x01 \x01(\tR\busername\"H\n" +
+	"\x19UpdateProfileImageRequest\x12+\n" +
+	"\rprofile_image\x18\x01 \x01(\v2\x06.ImageR\fprofileImage\"5\n" +
 	"\x1aUpdateProfileImageResponse\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\"C\n" +
 	"\x1fUpdateProfileDescriptionRequest\x12 \n" +
@@ -698,15 +698,15 @@ const file_proto_user_user_proto_rawDesc = "" +
 	"\bpassword\x18\x01 \x01(\tR\bpassword\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\"4\n" +
 	"\x16ChangePasswordResponse\x12\x1a\n" +
-	"\bpassword\x18\x01 \x01(\tR\bpassword2\x89\x04\n" +
-	"\x04User\x120\n" +
-	"\x05Login\x12\x12.user.LoginRequest\x1a\x13.user.LoginResponse\x129\n" +
-	"\bRegister\x12\x15.user.RegisterRequest\x1a\x16.user.RegisterResponse\x12B\n" +
-	"\vGetUserById\x12\x18.user.GetUserByIdRequest\x1a\x19.user.GetUserByIdResponse\x12?\n" +
-	"\bFindUser\x12\x18.user.GetUserByIdRequest\x1a\x19.user.GetUserByIdResponse\x12W\n" +
-	"\x12UpdateProfileImage\x12\x1f.user.UpdateProfileImageRequest\x1a .user.UpdateProfileImageResponse\x12i\n" +
-	"\x18UpdateProfileDescription\x12%.user.UpdateProfileDescriptionRequest\x1a&.user.UpdateProfileDescriptionResponse\x12K\n" +
-	"\x0eChangePassword\x12\x1b.user.ChangePasswordRequest\x1a\x1c.user.ChangePasswordResponseB-Z+github.com/sergeyreshetnyakov/social-protosb\x06proto3"
+	"\bpassword\x18\x01 \x01(\tR\bpassword2\xc3\x03\n" +
+	"\x04User\x12&\n" +
+	"\x05Login\x12\r.LoginRequest\x1a\x0e.LoginResponse\x12/\n" +
+	"\bRegister\x12\x10.RegisterRequest\x1a\x11.RegisterResponse\x128\n" +
+	"\vGetUserById\x12\x13.GetUserByIdRequest\x1a\x14.GetUserByIdResponse\x125\n" +
+	"\bFindUser\x12\x13.GetUserByIdRequest\x1a\x14.GetUserByIdResponse\x12M\n" +
+	"\x12UpdateProfileImage\x12\x1a.UpdateProfileImageRequest\x1a\x1b.UpdateProfileImageResponse\x12_\n" +
+	"\x18UpdateProfileDescription\x12 .UpdateProfileDescriptionRequest\x1a!.UpdateProfileDescriptionResponse\x12A\n" +
+	"\x0eChangePassword\x12\x16.ChangePasswordRequest\x1a\x17.ChangePasswordResponseB\aZ\x05/userb\x06proto3"
 
 var (
 	file_proto_user_user_proto_rawDescOnce sync.Once
@@ -722,37 +722,37 @@ func file_proto_user_user_proto_rawDescGZIP() []byte {
 
 var file_proto_user_user_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_proto_user_user_proto_goTypes = []any{
-	(*Image)(nil),                            // 0: user.Image
-	(*LoginRequest)(nil),                     // 1: user.LoginRequest
-	(*LoginResponse)(nil),                    // 2: user.LoginResponse
-	(*RegisterRequest)(nil),                  // 3: user.RegisterRequest
-	(*RegisterResponse)(nil),                 // 4: user.RegisterResponse
-	(*GetUserByIdRequest)(nil),               // 5: user.GetUserByIdRequest
-	(*GetUserByIdResponse)(nil),              // 6: user.GetUserByIdResponse
-	(*UpdateProfileImageRequest)(nil),        // 7: user.UpdateProfileImageRequest
-	(*UpdateProfileImageResponse)(nil),       // 8: user.UpdateProfileImageResponse
-	(*UpdateProfileDescriptionRequest)(nil),  // 9: user.UpdateProfileDescriptionRequest
-	(*UpdateProfileDescriptionResponse)(nil), // 10: user.UpdateProfileDescriptionResponse
-	(*ChangePasswordRequest)(nil),            // 11: user.ChangePasswordRequest
-	(*ChangePasswordResponse)(nil),           // 12: user.ChangePasswordResponse
+	(*Image)(nil),                            // 0: Image
+	(*LoginRequest)(nil),                     // 1: LoginRequest
+	(*LoginResponse)(nil),                    // 2: LoginResponse
+	(*RegisterRequest)(nil),                  // 3: RegisterRequest
+	(*RegisterResponse)(nil),                 // 4: RegisterResponse
+	(*GetUserByIdRequest)(nil),               // 5: GetUserByIdRequest
+	(*GetUserByIdResponse)(nil),              // 6: GetUserByIdResponse
+	(*UpdateProfileImageRequest)(nil),        // 7: UpdateProfileImageRequest
+	(*UpdateProfileImageResponse)(nil),       // 8: UpdateProfileImageResponse
+	(*UpdateProfileDescriptionRequest)(nil),  // 9: UpdateProfileDescriptionRequest
+	(*UpdateProfileDescriptionResponse)(nil), // 10: UpdateProfileDescriptionResponse
+	(*ChangePasswordRequest)(nil),            // 11: ChangePasswordRequest
+	(*ChangePasswordResponse)(nil),           // 12: ChangePasswordResponse
 }
 var file_proto_user_user_proto_depIdxs = []int32{
-	0,  // 0: user.RegisterRequest.profile_image:type_name -> user.Image
-	0,  // 1: user.UpdateProfileImageRequest.profile_image:type_name -> user.Image
-	1,  // 2: user.User.Login:input_type -> user.LoginRequest
-	3,  // 3: user.User.Register:input_type -> user.RegisterRequest
-	5,  // 4: user.User.GetUserById:input_type -> user.GetUserByIdRequest
-	5,  // 5: user.User.FindUser:input_type -> user.GetUserByIdRequest
-	7,  // 6: user.User.UpdateProfileImage:input_type -> user.UpdateProfileImageRequest
-	9,  // 7: user.User.UpdateProfileDescription:input_type -> user.UpdateProfileDescriptionRequest
-	11, // 8: user.User.ChangePassword:input_type -> user.ChangePasswordRequest
-	2,  // 9: user.User.Login:output_type -> user.LoginResponse
-	4,  // 10: user.User.Register:output_type -> user.RegisterResponse
-	6,  // 11: user.User.GetUserById:output_type -> user.GetUserByIdResponse
-	6,  // 12: user.User.FindUser:output_type -> user.GetUserByIdResponse
-	8,  // 13: user.User.UpdateProfileImage:output_type -> user.UpdateProfileImageResponse
-	10, // 14: user.User.UpdateProfileDescription:output_type -> user.UpdateProfileDescriptionResponse
-	12, // 15: user.User.ChangePassword:output_type -> user.ChangePasswordResponse
+	0,  // 0: RegisterRequest.profile_image:type_name -> Image
+	0,  // 1: UpdateProfileImageRequest.profile_image:type_name -> Image
+	1,  // 2: User.Login:input_type -> LoginRequest
+	3,  // 3: User.Register:input_type -> RegisterRequest
+	5,  // 4: User.GetUserById:input_type -> GetUserByIdRequest
+	5,  // 5: User.FindUser:input_type -> GetUserByIdRequest
+	7,  // 6: User.UpdateProfileImage:input_type -> UpdateProfileImageRequest
+	9,  // 7: User.UpdateProfileDescription:input_type -> UpdateProfileDescriptionRequest
+	11, // 8: User.ChangePassword:input_type -> ChangePasswordRequest
+	2,  // 9: User.Login:output_type -> LoginResponse
+	4,  // 10: User.Register:output_type -> RegisterResponse
+	6,  // 11: User.GetUserById:output_type -> GetUserByIdResponse
+	6,  // 12: User.FindUser:output_type -> GetUserByIdResponse
+	8,  // 13: User.UpdateProfileImage:output_type -> UpdateProfileImageResponse
+	10, // 14: User.UpdateProfileDescription:output_type -> UpdateProfileDescriptionResponse
+	12, // 15: User.ChangePassword:output_type -> ChangePasswordResponse
 	9,  // [9:16] is the sub-list for method output_type
 	2,  // [2:9] is the sub-list for method input_type
 	2,  // [2:2] is the sub-list for extension type_name

@@ -4,7 +4,7 @@
 // 	protoc        v5.29.3
 // source: proto/comment/comment.proto
 
-package social_protos
+package comment
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -497,7 +497,7 @@ var File_proto_comment_comment_proto protoreflect.FileDescriptor
 
 const file_proto_comment_comment_proto_rawDesc = "" +
 	"\n" +
-	"\x1bproto/comment/comment.proto\x12\acomment\"5\n" +
+	"\x1bproto/comment/comment.proto\"5\n" +
 	"\x1aGetCommentsByPostIdRequest\x12\x17\n" +
 	"\apost_id\x18\x01 \x01(\x03R\x06postId\"\xa8\x01\n" +
 	"\x1bGetCommentsByPostIdResponse\x12\x18\n" +
@@ -528,15 +528,16 @@ const file_proto_comment_comment_proto_rawDesc = "" +
 	"comment_id\x18\x01 \x01(\x03R\tcommentId\"6\n" +
 	"\x15DeleteCommentResponse\x12\x1d\n" +
 	"\n" +
-	"comment_id\x18\x01 \x01(\x03R\tcommentId2\xad\x03\n" +
-	"\aComment\x12b\n" +
-	"\x13GetCommentsByPostId\x12#.comment.GetCommentsByPostIdRequest\x1a$.comment.GetCommentsByPostIdResponse0\x01\x12E\n" +
+	"comment_id\x18\x01 \x01(\x03R\tcommentId2\xdd\x02\n" +
+	"\aComment\x12R\n" +
+	"\x13GetCommentsByPostId\x12\x1b.GetCommentsByPostIdRequest\x1a\x1c.GetCommentsByPostIdResponse0\x01\x125\n" +
 	"\n" +
-	"AddComment\x12\x1a.comment.AddCommentRequest\x1a\x1b.comment.AddCommentResponse\x12`\n" +
-	"\x13ChangeCommentRating\x12#.comment.ChangeCommentRatingRequest\x1a$.comment.ChangeCommentRatingResponse\x12E\n" +
+	"AddComment\x12\x12.AddCommentRequest\x1a\x13.AddCommentResponse\x12P\n" +
+	"\x13ChangeCommentRating\x12\x1b.ChangeCommentRatingRequest\x1a\x1c.ChangeCommentRatingResponse\x125\n" +
 	"\n" +
-	"PinComment\x12\x1a.comment.PinCommentRequest\x1a\x1b.comment.PinCommentResponse\x12N\n" +
-	"\rDeleteComment\x12\x1d.comment.DeleteCommentRequest\x1a\x1e.comment.DeleteCommentResponseB-Z+github.com/sergeyreshetnyakov/social-protosb\x06proto3"
+	"PinComment\x12\x12.PinCommentRequest\x1a\x13.PinCommentResponse\x12>\n" +
+	"\rDeleteComment\x12\x15.DeleteCommentRequest\x1a\x16.DeleteCommentResponseB\n" +
+	"Z\b/commentb\x06proto3"
 
 var (
 	file_proto_comment_comment_proto_rawDescOnce sync.Once
@@ -552,28 +553,28 @@ func file_proto_comment_comment_proto_rawDescGZIP() []byte {
 
 var file_proto_comment_comment_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_proto_comment_comment_proto_goTypes = []any{
-	(*GetCommentsByPostIdRequest)(nil),  // 0: comment.GetCommentsByPostIdRequest
-	(*GetCommentsByPostIdResponse)(nil), // 1: comment.GetCommentsByPostIdResponse
-	(*AddCommentRequest)(nil),           // 2: comment.AddCommentRequest
-	(*AddCommentResponse)(nil),          // 3: comment.AddCommentResponse
-	(*ChangeCommentRatingRequest)(nil),  // 4: comment.ChangeCommentRatingRequest
-	(*ChangeCommentRatingResponse)(nil), // 5: comment.ChangeCommentRatingResponse
-	(*PinCommentRequest)(nil),           // 6: comment.PinCommentRequest
-	(*PinCommentResponse)(nil),          // 7: comment.PinCommentResponse
-	(*DeleteCommentRequest)(nil),        // 8: comment.DeleteCommentRequest
-	(*DeleteCommentResponse)(nil),       // 9: comment.DeleteCommentResponse
+	(*GetCommentsByPostIdRequest)(nil),  // 0: GetCommentsByPostIdRequest
+	(*GetCommentsByPostIdResponse)(nil), // 1: GetCommentsByPostIdResponse
+	(*AddCommentRequest)(nil),           // 2: AddCommentRequest
+	(*AddCommentResponse)(nil),          // 3: AddCommentResponse
+	(*ChangeCommentRatingRequest)(nil),  // 4: ChangeCommentRatingRequest
+	(*ChangeCommentRatingResponse)(nil), // 5: ChangeCommentRatingResponse
+	(*PinCommentRequest)(nil),           // 6: PinCommentRequest
+	(*PinCommentResponse)(nil),          // 7: PinCommentResponse
+	(*DeleteCommentRequest)(nil),        // 8: DeleteCommentRequest
+	(*DeleteCommentResponse)(nil),       // 9: DeleteCommentResponse
 }
 var file_proto_comment_comment_proto_depIdxs = []int32{
-	0, // 0: comment.Comment.GetCommentsByPostId:input_type -> comment.GetCommentsByPostIdRequest
-	2, // 1: comment.Comment.AddComment:input_type -> comment.AddCommentRequest
-	4, // 2: comment.Comment.ChangeCommentRating:input_type -> comment.ChangeCommentRatingRequest
-	6, // 3: comment.Comment.PinComment:input_type -> comment.PinCommentRequest
-	8, // 4: comment.Comment.DeleteComment:input_type -> comment.DeleteCommentRequest
-	1, // 5: comment.Comment.GetCommentsByPostId:output_type -> comment.GetCommentsByPostIdResponse
-	3, // 6: comment.Comment.AddComment:output_type -> comment.AddCommentResponse
-	5, // 7: comment.Comment.ChangeCommentRating:output_type -> comment.ChangeCommentRatingResponse
-	7, // 8: comment.Comment.PinComment:output_type -> comment.PinCommentResponse
-	9, // 9: comment.Comment.DeleteComment:output_type -> comment.DeleteCommentResponse
+	0, // 0: Comment.GetCommentsByPostId:input_type -> GetCommentsByPostIdRequest
+	2, // 1: Comment.AddComment:input_type -> AddCommentRequest
+	4, // 2: Comment.ChangeCommentRating:input_type -> ChangeCommentRatingRequest
+	6, // 3: Comment.PinComment:input_type -> PinCommentRequest
+	8, // 4: Comment.DeleteComment:input_type -> DeleteCommentRequest
+	1, // 5: Comment.GetCommentsByPostId:output_type -> GetCommentsByPostIdResponse
+	3, // 6: Comment.AddComment:output_type -> AddCommentResponse
+	5, // 7: Comment.ChangeCommentRating:output_type -> ChangeCommentRatingResponse
+	7, // 8: Comment.PinComment:output_type -> PinCommentResponse
+	9, // 9: Comment.DeleteComment:output_type -> DeleteCommentResponse
 	5, // [5:10] is the sub-list for method output_type
 	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

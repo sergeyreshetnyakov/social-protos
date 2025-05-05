@@ -4,7 +4,7 @@
 // - protoc             v5.29.3
 // source: proto/post/post.proto
 
-package social_protos
+package post
 
 import (
 	context "context"
@@ -19,13 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Post_GetAllPosts_FullMethodName      = "/post.Post/GetAllPosts"
-	Post_GetPostById_FullMethodName      = "/post.Post/GetPostById"
-	Post_GetPostByUser_FullMethodName    = "/post.Post/GetPostByUser"
-	Post_FindPost_FullMethodName         = "/post.Post/FindPost"
-	Post_AddPost_FullMethodName          = "/post.Post/AddPost"
-	Post_ChangePostRating_FullMethodName = "/post.Post/ChangePostRating"
-	Post_DeletePost_FullMethodName       = "/post.Post/DeletePost"
+	Post_GetAllPosts_FullMethodName      = "/Post/GetAllPosts"
+	Post_GetPostById_FullMethodName      = "/Post/GetPostById"
+	Post_GetPostByUser_FullMethodName    = "/Post/GetPostByUser"
+	Post_FindPost_FullMethodName         = "/Post/FindPost"
+	Post_AddPost_FullMethodName          = "/Post/AddPost"
+	Post_ChangePostRating_FullMethodName = "/Post/ChangePostRating"
+	Post_DeletePost_FullMethodName       = "/Post/DeletePost"
 )
 
 // PostClient is the client API for Post service.
@@ -316,7 +316,7 @@ func _Post_DeletePost_Handler(srv interface{}, ctx context.Context, dec func(int
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Post_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "post.Post",
+	ServiceName: "Post",
 	HandlerType: (*PostServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

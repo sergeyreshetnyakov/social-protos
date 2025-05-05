@@ -1,7 +1,5 @@
 syntax = "proto3";
-package comment;
-
-option go_package = "github.com/sergeyreshetnyakov/social-protos";
+option go_package = "/comment";
 
 service Comment {
     rpc GetCommentsByPostId (GetCommentsByPostIdRequest) returns (stream GetCommentsByPostIdResponse);

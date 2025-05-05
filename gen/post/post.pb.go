@@ -4,7 +4,7 @@
 // 	protoc        v5.29.3
 // source: proto/post/post.proto
 
-package social_protos
+package post
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -761,7 +761,7 @@ var File_proto_post_post_proto protoreflect.FileDescriptor
 
 const file_proto_post_post_proto_rawDesc = "" +
 	"\n" +
-	"\x15proto/post/post.proto\x12\x04post\"\x14\n" +
+	"\x15proto/post/post.proto\"\x14\n" +
 	"\x12GetAllPostsRequest\"\x8e\x01\n" +
 	"\x13GetAllPostsResponse\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12\x18\n" +
@@ -805,16 +805,16 @@ const file_proto_post_post_proto_rawDesc = "" +
 	"\x11DeletePostRequest\x12\x17\n" +
 	"\apost_id\x18\x01 \x01(\x03R\x06postId\"-\n" +
 	"\x12DeletePostResponse\x12\x17\n" +
-	"\apost_id\x18\x01 \x01(\x03R\x06postId2\xe3\x03\n" +
-	"\x04Post\x12D\n" +
-	"\vGetAllPosts\x12\x18.post.GetAllPostsRequest\x1a\x19.post.GetAllPostsResponse0\x01\x12B\n" +
-	"\vGetPostById\x12\x18.post.GetPostByIdRequest\x1a\x19.post.GetPostByIdResponse\x12J\n" +
-	"\rGetPostByUser\x12\x1a.post.GetPostByUserRequest\x1a\x1b.post.GetPostByUserResponse0\x01\x129\n" +
-	"\bFindPost\x12\x15.post.FindPostRequest\x1a\x16.post.FindPostResponse\x126\n" +
-	"\aAddPost\x12\x14.post.AddPostRequest\x1a\x15.post.AddPostResponse\x12Q\n" +
-	"\x10ChangePostRating\x12\x1d.post.ChangePostRatingRequest\x1a\x1e.post.ChangePostRatingResponse\x12?\n" +
+	"\apost_id\x18\x01 \x01(\x03R\x06postId2\x9d\x03\n" +
+	"\x04Post\x12:\n" +
+	"\vGetAllPosts\x12\x13.GetAllPostsRequest\x1a\x14.GetAllPostsResponse0\x01\x128\n" +
+	"\vGetPostById\x12\x13.GetPostByIdRequest\x1a\x14.GetPostByIdResponse\x12@\n" +
+	"\rGetPostByUser\x12\x15.GetPostByUserRequest\x1a\x16.GetPostByUserResponse0\x01\x12/\n" +
+	"\bFindPost\x12\x10.FindPostRequest\x1a\x11.FindPostResponse\x12,\n" +
+	"\aAddPost\x12\x0f.AddPostRequest\x1a\x10.AddPostResponse\x12G\n" +
+	"\x10ChangePostRating\x12\x18.ChangePostRatingRequest\x1a\x19.ChangePostRatingResponse\x125\n" +
 	"\n" +
-	"DeletePost\x12\x17.post.DeletePostRequest\x1a\x18.post.DeletePostResponseB-Z+github.com/sergeyreshetnyakov/social-protosb\x06proto3"
+	"DeletePost\x12\x12.DeletePostRequest\x1a\x13.DeletePostResponseB\aZ\x05/postb\x06proto3"
 
 var (
 	file_proto_post_post_proto_rawDescOnce sync.Once
@@ -830,36 +830,36 @@ func file_proto_post_post_proto_rawDescGZIP() []byte {
 
 var file_proto_post_post_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_proto_post_post_proto_goTypes = []any{
-	(*GetAllPostsRequest)(nil),       // 0: post.GetAllPostsRequest
-	(*GetAllPostsResponse)(nil),      // 1: post.GetAllPostsResponse
-	(*GetPostByIdRequest)(nil),       // 2: post.GetPostByIdRequest
-	(*GetPostByIdResponse)(nil),      // 3: post.GetPostByIdResponse
-	(*GetPostByUserRequest)(nil),     // 4: post.GetPostByUserRequest
-	(*GetPostByUserResponse)(nil),    // 5: post.GetPostByUserResponse
-	(*FindPostRequest)(nil),          // 6: post.FindPostRequest
-	(*FindPostResponse)(nil),         // 7: post.FindPostResponse
-	(*AddPostRequest)(nil),           // 8: post.AddPostRequest
-	(*AddPostResponse)(nil),          // 9: post.AddPostResponse
-	(*ChangePostRatingRequest)(nil),  // 10: post.ChangePostRatingRequest
-	(*ChangePostRatingResponse)(nil), // 11: post.ChangePostRatingResponse
-	(*DeletePostRequest)(nil),        // 12: post.DeletePostRequest
-	(*DeletePostResponse)(nil),       // 13: post.DeletePostResponse
+	(*GetAllPostsRequest)(nil),       // 0: GetAllPostsRequest
+	(*GetAllPostsResponse)(nil),      // 1: GetAllPostsResponse
+	(*GetPostByIdRequest)(nil),       // 2: GetPostByIdRequest
+	(*GetPostByIdResponse)(nil),      // 3: GetPostByIdResponse
+	(*GetPostByUserRequest)(nil),     // 4: GetPostByUserRequest
+	(*GetPostByUserResponse)(nil),    // 5: GetPostByUserResponse
+	(*FindPostRequest)(nil),          // 6: FindPostRequest
+	(*FindPostResponse)(nil),         // 7: FindPostResponse
+	(*AddPostRequest)(nil),           // 8: AddPostRequest
+	(*AddPostResponse)(nil),          // 9: AddPostResponse
+	(*ChangePostRatingRequest)(nil),  // 10: ChangePostRatingRequest
+	(*ChangePostRatingResponse)(nil), // 11: ChangePostRatingResponse
+	(*DeletePostRequest)(nil),        // 12: DeletePostRequest
+	(*DeletePostResponse)(nil),       // 13: DeletePostResponse
 }
 var file_proto_post_post_proto_depIdxs = []int32{
-	0,  // 0: post.Post.GetAllPosts:input_type -> post.GetAllPostsRequest
-	2,  // 1: post.Post.GetPostById:input_type -> post.GetPostByIdRequest
-	4,  // 2: post.Post.GetPostByUser:input_type -> post.GetPostByUserRequest
-	6,  // 3: post.Post.FindPost:input_type -> post.FindPostRequest
-	8,  // 4: post.Post.AddPost:input_type -> post.AddPostRequest
-	10, // 5: post.Post.ChangePostRating:input_type -> post.ChangePostRatingRequest
-	12, // 6: post.Post.DeletePost:input_type -> post.DeletePostRequest
-	1,  // 7: post.Post.GetAllPosts:output_type -> post.GetAllPostsResponse
-	3,  // 8: post.Post.GetPostById:output_type -> post.GetPostByIdResponse
-	5,  // 9: post.Post.GetPostByUser:output_type -> post.GetPostByUserResponse
-	7,  // 10: post.Post.FindPost:output_type -> post.FindPostResponse
-	9,  // 11: post.Post.AddPost:output_type -> post.AddPostResponse
-	11, // 12: post.Post.ChangePostRating:output_type -> post.ChangePostRatingResponse
-	13, // 13: post.Post.DeletePost:output_type -> post.DeletePostResponse
+	0,  // 0: Post.GetAllPosts:input_type -> GetAllPostsRequest
+	2,  // 1: Post.GetPostById:input_type -> GetPostByIdRequest
+	4,  // 2: Post.GetPostByUser:input_type -> GetPostByUserRequest
+	6,  // 3: Post.FindPost:input_type -> FindPostRequest
+	8,  // 4: Post.AddPost:input_type -> AddPostRequest
+	10, // 5: Post.ChangePostRating:input_type -> ChangePostRatingRequest
+	12, // 6: Post.DeletePost:input_type -> DeletePostRequest
+	1,  // 7: Post.GetAllPosts:output_type -> GetAllPostsResponse
+	3,  // 8: Post.GetPostById:output_type -> GetPostByIdResponse
+	5,  // 9: Post.GetPostByUser:output_type -> GetPostByUserResponse
+	7,  // 10: Post.FindPost:output_type -> FindPostResponse
+	9,  // 11: Post.AddPost:output_type -> AddPostResponse
+	11, // 12: Post.ChangePostRating:output_type -> ChangePostRatingResponse
+	13, // 13: Post.DeletePost:output_type -> DeletePostResponse
 	7,  // [7:14] is the sub-list for method output_type
 	0,  // [0:7] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name

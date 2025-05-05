@@ -4,7 +4,7 @@
 // - protoc             v5.29.3
 // source: proto/user/user.proto
 
-package social_protos
+package user
 
 import (
 	context "context"
@@ -19,13 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	User_Login_FullMethodName                    = "/user.User/Login"
-	User_Register_FullMethodName                 = "/user.User/Register"
-	User_GetUserById_FullMethodName              = "/user.User/GetUserById"
-	User_FindUser_FullMethodName                 = "/user.User/FindUser"
-	User_UpdateProfileImage_FullMethodName       = "/user.User/UpdateProfileImage"
-	User_UpdateProfileDescription_FullMethodName = "/user.User/UpdateProfileDescription"
-	User_ChangePassword_FullMethodName           = "/user.User/ChangePassword"
+	User_Login_FullMethodName                    = "/User/Login"
+	User_Register_FullMethodName                 = "/User/Register"
+	User_GetUserById_FullMethodName              = "/User/GetUserById"
+	User_FindUser_FullMethodName                 = "/User/FindUser"
+	User_UpdateProfileImage_FullMethodName       = "/User/UpdateProfileImage"
+	User_UpdateProfileDescription_FullMethodName = "/User/UpdateProfileDescription"
+	User_ChangePassword_FullMethodName           = "/User/ChangePassword"
 )
 
 // UserClient is the client API for User service.
@@ -312,7 +312,7 @@ func _User_ChangePassword_Handler(srv interface{}, ctx context.Context, dec func
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var User_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "user.User",
+	ServiceName: "User",
 	HandlerType: (*UserServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

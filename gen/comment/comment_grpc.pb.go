@@ -4,7 +4,7 @@
 // - protoc             v5.29.3
 // source: proto/comment/comment.proto
 
-package social_protos
+package comment
 
 import (
 	context "context"
@@ -19,11 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Comment_GetCommentsByPostId_FullMethodName = "/comment.Comment/GetCommentsByPostId"
-	Comment_AddComment_FullMethodName          = "/comment.Comment/AddComment"
-	Comment_ChangeCommentRating_FullMethodName = "/comment.Comment/ChangeCommentRating"
-	Comment_PinComment_FullMethodName          = "/comment.Comment/PinComment"
-	Comment_DeleteComment_FullMethodName       = "/comment.Comment/DeleteComment"
+	Comment_GetCommentsByPostId_FullMethodName = "/Comment/GetCommentsByPostId"
+	Comment_AddComment_FullMethodName          = "/Comment/AddComment"
+	Comment_ChangeCommentRating_FullMethodName = "/Comment/ChangeCommentRating"
+	Comment_PinComment_FullMethodName          = "/Comment/PinComment"
+	Comment_DeleteComment_FullMethodName       = "/Comment/DeleteComment"
 )
 
 // CommentClient is the client API for Comment service.
@@ -246,7 +246,7 @@ func _Comment_DeleteComment_Handler(srv interface{}, ctx context.Context, dec fu
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Comment_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "comment.Comment",
+	ServiceName: "Comment",
 	HandlerType: (*CommentServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
