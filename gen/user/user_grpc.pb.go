@@ -35,7 +35,7 @@ type UserClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	GetUserById(ctx context.Context, in *GetUserByIdRequest, opts ...grpc.CallOption) (*GetUserByIdResponse, error)
-	FindUser(ctx context.Context, in *GetUserByIdRequest, opts ...grpc.CallOption) (*GetUserByIdResponse, error)
+	FindUser(ctx context.Context, in *FindUserRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[FindUserResponse], error)
 	UpdateProfileImage(ctx context.Context, in *UpdateProfileImageRequest, opts ...grpc.CallOption) (*UpdateProfileImageResponse, error)
 	UpdateProfileDescription(ctx context.Context, in *UpdateProfileDescriptionRequest, opts ...grpc.CallOption) (*UpdateProfileDescriptionResponse, error)
 	ChangePassword(ctx context.Context, in *ChangePasswordRequest, opts ...grpc.CallOption) (*ChangePasswordResponse, error)
@@ -79,15 +79,24 @@ func (c *userClient) GetUserById(ctx context.Context, in *GetUserByIdRequest, op
 	return out, nil
 }
 
-func (c *userClient) FindUser(ctx context.Context, in *GetUserByIdRequest, opts ...grpc.CallOption) (*GetUserByIdResponse, error) {
+func (c *userClient) FindUser(ctx context.Context, in *FindUserRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[FindUserResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetUserByIdResponse)
-	err := c.cc.Invoke(ctx, User_FindUser_FullMethodName, in, out, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &User_ServiceDesc.Streams[0], User_FindUser_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &grpc.GenericClientStream[FindUserRequest, FindUserResponse]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
 }
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type User_FindUserClient = grpc.ServerStreamingClient[FindUserResponse]
 
 func (c *userClient) UpdateProfileImage(ctx context.Context, in *UpdateProfileImageRequest, opts ...grpc.CallOption) (*UpdateProfileImageResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -126,7 +135,7 @@ type UserServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	GetUserById(context.Context, *GetUserByIdRequest) (*GetUserByIdResponse, error)
-	FindUser(context.Context, *GetUserByIdRequest) (*GetUserByIdResponse, error)
+	FindUser(*FindUserRequest, grpc.ServerStreamingServer[FindUserResponse]) error
 	UpdateProfileImage(context.Context, *UpdateProfileImageRequest) (*UpdateProfileImageResponse, error)
 	UpdateProfileDescription(context.Context, *UpdateProfileDescriptionRequest) (*UpdateProfileDescriptionResponse, error)
 	ChangePassword(context.Context, *ChangePasswordRequest) (*ChangePasswordResponse, error)
@@ -149,8 +158,8 @@ func (UnimplementedUserServer) Register(context.Context, *RegisterRequest) (*Reg
 func (UnimplementedUserServer) GetUserById(context.Context, *GetUserByIdRequest) (*GetUserByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserById not implemented")
 }
-func (UnimplementedUserServer) FindUser(context.Context, *GetUserByIdRequest) (*GetUserByIdResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FindUser not implemented")
+func (UnimplementedUserServer) FindUser(*FindUserRequest, grpc.ServerStreamingServer[FindUserResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method FindUser not implemented")
 }
 func (UnimplementedUserServer) UpdateProfileImage(context.Context, *UpdateProfileImageRequest) (*UpdateProfileImageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateProfileImage not implemented")
@@ -236,23 +245,16 @@ func _User_GetUserById_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_FindUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserByIdRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _User_FindUser_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(FindUserRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(UserServer).FindUser(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: User_FindUser_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).FindUser(ctx, req.(*GetUserByIdRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(UserServer).FindUser(m, &grpc.GenericServerStream[FindUserRequest, FindUserResponse]{ServerStream: stream})
 }
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type User_FindUserServer = grpc.ServerStreamingServer[FindUserResponse]
 
 func _User_UpdateProfileImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateProfileImageRequest)
@@ -328,10 +330,6 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_GetUserById_Handler,
 		},
 		{
-			MethodName: "FindUser",
-			Handler:    _User_FindUser_Handler,
-		},
-		{
 			MethodName: "UpdateProfileImage",
 			Handler:    _User_UpdateProfileImage_Handler,
 		},
@@ -344,6 +342,12 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_ChangePassword_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "FindUser",
+			Handler:       _User_FindUser_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "proto/user/user.proto",
 }
