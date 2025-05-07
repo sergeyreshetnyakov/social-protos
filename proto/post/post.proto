@@ -5,7 +5,7 @@ service Post {
     rpc GetAllPosts (GetAllPostsRequest) returns (stream GetAllPostsResponse);
     rpc GetPostById (GetPostByIdRequest) returns (GetPostByIdResponse);
     rpc GetPostByUser (GetPostByUserRequest) returns (stream GetPostByUserResponse);
-    rpc FindPost (FindPostRequest) returns (FindPostResponse);
+    rpc FindPost (stream FindPostRequest) returns (stream FindPostResponse);
     rpc AddPost (AddPostRequest) returns (AddPostResponse);
     rpc ChangePostRating (ChangePostRatingRequest) returns (ChangePostRatingResponse);
     rpc DeletePost (DeletePostRequest) returns (DeletePostResponse);

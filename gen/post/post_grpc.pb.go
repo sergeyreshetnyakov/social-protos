@@ -35,7 +35,7 @@ type PostClient interface {
 	GetAllPosts(ctx context.Context, in *GetAllPostsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GetAllPostsResponse], error)
 	GetPostById(ctx context.Context, in *GetPostByIdRequest, opts ...grpc.CallOption) (*GetPostByIdResponse, error)
 	GetPostByUser(ctx context.Context, in *GetPostByUserRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GetPostByUserResponse], error)
-	FindPost(ctx context.Context, in *FindPostRequest, opts ...grpc.CallOption) (*FindPostResponse, error)
+	FindPost(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[FindPostRequest, FindPostResponse], error)
 	AddPost(ctx context.Context, in *AddPostRequest, opts ...grpc.CallOption) (*AddPostResponse, error)
 	ChangePostRating(ctx context.Context, in *ChangePostRatingRequest, opts ...grpc.CallOption) (*ChangePostRatingResponse, error)
 	DeletePost(ctx context.Context, in *DeletePostRequest, opts ...grpc.CallOption) (*DeletePostResponse, error)
@@ -97,15 +97,18 @@ func (c *postClient) GetPostByUser(ctx context.Context, in *GetPostByUserRequest
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type Post_GetPostByUserClient = grpc.ServerStreamingClient[GetPostByUserResponse]
 
-func (c *postClient) FindPost(ctx context.Context, in *FindPostRequest, opts ...grpc.CallOption) (*FindPostResponse, error) {
+func (c *postClient) FindPost(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[FindPostRequest, FindPostResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(FindPostResponse)
-	err := c.cc.Invoke(ctx, Post_FindPost_FullMethodName, in, out, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Post_ServiceDesc.Streams[2], Post_FindPost_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &grpc.GenericClientStream[FindPostRequest, FindPostResponse]{ClientStream: stream}
+	return x, nil
 }
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Post_FindPostClient = grpc.BidiStreamingClient[FindPostRequest, FindPostResponse]
 
 func (c *postClient) AddPost(ctx context.Context, in *AddPostRequest, opts ...grpc.CallOption) (*AddPostResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -144,7 +147,7 @@ type PostServer interface {
 	GetAllPosts(*GetAllPostsRequest, grpc.ServerStreamingServer[GetAllPostsResponse]) error
 	GetPostById(context.Context, *GetPostByIdRequest) (*GetPostByIdResponse, error)
 	GetPostByUser(*GetPostByUserRequest, grpc.ServerStreamingServer[GetPostByUserResponse]) error
-	FindPost(context.Context, *FindPostRequest) (*FindPostResponse, error)
+	FindPost(grpc.BidiStreamingServer[FindPostRequest, FindPostResponse]) error
 	AddPost(context.Context, *AddPostRequest) (*AddPostResponse, error)
 	ChangePostRating(context.Context, *ChangePostRatingRequest) (*ChangePostRatingResponse, error)
 	DeletePost(context.Context, *DeletePostRequest) (*DeletePostResponse, error)
@@ -167,8 +170,8 @@ func (UnimplementedPostServer) GetPostById(context.Context, *GetPostByIdRequest)
 func (UnimplementedPostServer) GetPostByUser(*GetPostByUserRequest, grpc.ServerStreamingServer[GetPostByUserResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method GetPostByUser not implemented")
 }
-func (UnimplementedPostServer) FindPost(context.Context, *FindPostRequest) (*FindPostResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FindPost not implemented")
+func (UnimplementedPostServer) FindPost(grpc.BidiStreamingServer[FindPostRequest, FindPostResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method FindPost not implemented")
 }
 func (UnimplementedPostServer) AddPost(context.Context, *AddPostRequest) (*AddPostResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddPost not implemented")
@@ -240,23 +243,12 @@ func _Post_GetPostByUser_Handler(srv interface{}, stream grpc.ServerStream) erro
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type Post_GetPostByUserServer = grpc.ServerStreamingServer[GetPostByUserResponse]
 
-func _Post_FindPost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FindPostRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PostServer).FindPost(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Post_FindPost_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PostServer).FindPost(ctx, req.(*FindPostRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+func _Post_FindPost_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(PostServer).FindPost(&grpc.GenericServerStream[FindPostRequest, FindPostResponse]{ServerStream: stream})
 }
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Post_FindPostServer = grpc.BidiStreamingServer[FindPostRequest, FindPostResponse]
 
 func _Post_AddPost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddPostRequest)
@@ -324,10 +316,6 @@ var Post_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Post_GetPostById_Handler,
 		},
 		{
-			MethodName: "FindPost",
-			Handler:    _Post_FindPost_Handler,
-		},
-		{
 			MethodName: "AddPost",
 			Handler:    _Post_AddPost_Handler,
 		},
@@ -350,6 +338,12 @@ var Post_ServiceDesc = grpc.ServiceDesc{
 			StreamName:    "GetPostByUser",
 			Handler:       _Post_GetPostByUser_Handler,
 			ServerStreams: true,
+		},
+		{
+			StreamName:    "FindPost",
+			Handler:       _Post_FindPost_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
 		},
 	},
 	Metadata: "proto/post/post.proto",

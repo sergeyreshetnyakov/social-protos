@@ -6,6 +6,7 @@ tasks:
     vars:
       IN: "{{index .MATCH 0}}"
       OUT: "{{index .MATCH 1}}"
+      PROTONAME: "{{index .MATCH 0}}"
     aliases: ["gen"]
     cmds:
-      - protoc --go_out={{.OUT}} --go_opt=paths=source_relative --go-grpc_out={{.OUT}} --go-grpc_opt=paths=source_relative {{.IN}}
+      - protoc --go_out=gen/{{.PROTONAME}} --go_opt=paths=source_relative --go-grpc_out=gen/{{.PROTONAME}} proto/{{.PROTONAME}}/{{.PROTONAME}}.proto

@@ -4,8 +4,8 @@ option go_package = "/user";
 service User {
     rpc Login (LoginRequest) returns (LoginResponse);
     rpc Register (RegisterRequest) returns (RegisterResponse);
-    rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse);
-    rpc FindUser (FindUserRequest) returns (stream FindUserResponse);
+    rpc GetUserByUsername (GetUserByUsernameRequest) returns (GetUserByUsernameResponse);
+    rpc FindUser (stream FindUserRequest) returns (stream FindUserResponse);
     rpc UpdateProfileImage (UpdateProfileImageRequest) returns (UpdateProfileImageResponse);
     rpc UpdateProfileDescription (UpdateProfileDescriptionRequest) returns (UpdateProfileDescriptionResponse);
     rpc ChangePassword (ChangePasswordRequest) returns (ChangePasswordResponse);
@@ -30,7 +30,7 @@ message RegisterRequest {
     string username = 1;
     string email = 2;
     string password = 3;
-    optional string description = 4;
+    string description = 4;
     optional Image profile_image = 5;
 }
 
@@ -38,12 +38,14 @@ message RegisterResponse {
     int64 user_id = 1;
 }
 
-message GetUserByIdRequest {
-    int64 user_id =1;
+message GetUserByUsernameRequest {
+    string username = 1;
 }
 
-message GetUserByIdResponse {
+message GetUserByUsernameResponse {
     string username = 1;
+    string description = 2;
+    Image profile_image = 3;
 }
 
 message FindUserRequest {
@@ -75,7 +77,7 @@ message UpdateProfileDescriptionResponse {
 
 message ChangePasswordRequest {
     string password = 1;
-    int64 user_id = 2;
+    string email = 3;
 }
 
 message ChangePasswordResponse {

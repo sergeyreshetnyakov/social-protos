@@ -805,12 +805,12 @@ const file_proto_post_post_proto_rawDesc = "" +
 	"\x11DeletePostRequest\x12\x17\n" +
 	"\apost_id\x18\x01 \x01(\x03R\x06postId\"-\n" +
 	"\x12DeletePostResponse\x12\x17\n" +
-	"\apost_id\x18\x01 \x01(\x03R\x06postId2\x9d\x03\n" +
+	"\apost_id\x18\x01 \x01(\x03R\x06postId2\xa1\x03\n" +
 	"\x04Post\x12:\n" +
 	"\vGetAllPosts\x12\x13.GetAllPostsRequest\x1a\x14.GetAllPostsResponse0\x01\x128\n" +
 	"\vGetPostById\x12\x13.GetPostByIdRequest\x1a\x14.GetPostByIdResponse\x12@\n" +
-	"\rGetPostByUser\x12\x15.GetPostByUserRequest\x1a\x16.GetPostByUserResponse0\x01\x12/\n" +
-	"\bFindPost\x12\x10.FindPostRequest\x1a\x11.FindPostResponse\x12,\n" +
+	"\rGetPostByUser\x12\x15.GetPostByUserRequest\x1a\x16.GetPostByUserResponse0\x01\x123\n" +
+	"\bFindPost\x12\x10.FindPostRequest\x1a\x11.FindPostResponse(\x010\x01\x12,\n" +
 	"\aAddPost\x12\x0f.AddPostRequest\x1a\x10.AddPostResponse\x12G\n" +
 	"\x10ChangePostRating\x12\x18.ChangePostRatingRequest\x1a\x19.ChangePostRatingResponse\x125\n" +
 	"\n" +
