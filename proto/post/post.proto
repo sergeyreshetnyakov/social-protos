@@ -9,9 +9,17 @@ service Post {
     rpc AddPost (AddPostRequest) returns (AddPostResponse);
     rpc ChangePostRating (ChangePostRatingRequest) returns (ChangePostRatingResponse);
     rpc DeletePost (DeletePostRequest) returns (DeletePostResponse);
+    rpc GetCommentsByPostId (GetCommentsByPostIdRequest) returns (stream GetCommentsByPostIdResponse);
+    rpc AddComment (AddCommentRequest) returns (AddCommentResponse);
+    rpc ChangeCommentRating (ChangeCommentRatingRequest) returns (ChangeCommentRatingResponse);
+    rpc PinComment (PinCommentRequest) returns (PinCommentResponse);
+    rpc DeleteComment (DeleteCommentRequest) returns (DeleteCommentResponse);
 }
 
-message GetAllPostsRequest {}
+message GetAllPostsRequest {
+    int32 page_number = 2;
+    int32 results_per_page = 3;
+}
 
 message GetAllPostsResponse {
     string title = 1;
@@ -78,4 +86,50 @@ message DeletePostRequest {
 
 message DeletePostResponse {
     int64 post_id = 1;
+}
+
+message GetCommentsByPostIdRequest {
+    int64 post_id = 1;
+    int32 page_number = 2;
+    int32 results_per_page = 3;
+}
+
+message GetCommentsByPostIdResponse {
+    string content = 1;
+    bool is_pinned = 2;
+    int64 comment_id = 3;
+    int64 author_id = 4;
+    repeated string rating = 5;
+}
+
+message AddCommentRequest {
+    string content = 1;
+}
+
+message AddCommentResponse {
+    int64 comment_id = 1;
+}
+
+message ChangeCommentRatingRequest {
+    int64 comment_id = 1;
+}
+
+message ChangeCommentRatingResponse {
+    repeated string rating = 1;
+}
+
+message PinCommentRequest {
+    int64 comment_id = 1;
+}
+
+message PinCommentResponse {
+    int64 comment_id = 1;
+}
+
+message DeleteCommentRequest {
+    int64 comment_id = 1;
+}
+
+message DeleteCommentResponse {
+    int64 comment_id = 1;
 }

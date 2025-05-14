@@ -2,10 +2,8 @@ version: '3'
 
 tasks:
   default:
-  generate:*:*:
+  generate:*:
     vars:
-      IN: "{{index .MATCH 0}}"
-      OUT: "{{index .MATCH 1}}"
       PROTONAME: "{{index .MATCH 0}}"
     aliases: ["gen"]
     cmds:

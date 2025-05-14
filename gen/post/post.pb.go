@@ -22,9 +22,11 @@ const (
 )
 
 type GetAllPostsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	PageNumber     int32                  `protobuf:"varint,2,opt,name=page_number,json=pageNumber,proto3" json:"page_number,omitempty"`
+	ResultsPerPage int32                  `protobuf:"varint,3,opt,name=results_per_page,json=resultsPerPage,proto3" json:"results_per_page,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *GetAllPostsRequest) Reset() {
@@ -55,6 +57,20 @@ func (x *GetAllPostsRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetAllPostsRequest.ProtoReflect.Descriptor instead.
 func (*GetAllPostsRequest) Descriptor() ([]byte, []int) {
 	return file_proto_post_post_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *GetAllPostsRequest) GetPageNumber() int32 {
+	if x != nil {
+		return x.PageNumber
+	}
+	return 0
+}
+
+func (x *GetAllPostsRequest) GetResultsPerPage() int32 {
+	if x != nil {
+		return x.ResultsPerPage
+	}
+	return 0
 }
 
 type GetAllPostsResponse struct {
@@ -757,12 +773,503 @@ func (x *DeletePostResponse) GetPostId() int64 {
 	return 0
 }
 
+type GetCommentsByPostIdRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	PostId         int64                  `protobuf:"varint,1,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
+	PageNumber     int32                  `protobuf:"varint,2,opt,name=page_number,json=pageNumber,proto3" json:"page_number,omitempty"`
+	ResultsPerPage int32                  `protobuf:"varint,3,opt,name=results_per_page,json=resultsPerPage,proto3" json:"results_per_page,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *GetCommentsByPostIdRequest) Reset() {
+	*x = GetCommentsByPostIdRequest{}
+	mi := &file_proto_post_post_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetCommentsByPostIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCommentsByPostIdRequest) ProtoMessage() {}
+
+func (x *GetCommentsByPostIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_post_post_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCommentsByPostIdRequest.ProtoReflect.Descriptor instead.
+func (*GetCommentsByPostIdRequest) Descriptor() ([]byte, []int) {
+	return file_proto_post_post_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *GetCommentsByPostIdRequest) GetPostId() int64 {
+	if x != nil {
+		return x.PostId
+	}
+	return 0
+}
+
+func (x *GetCommentsByPostIdRequest) GetPageNumber() int32 {
+	if x != nil {
+		return x.PageNumber
+	}
+	return 0
+}
+
+func (x *GetCommentsByPostIdRequest) GetResultsPerPage() int32 {
+	if x != nil {
+		return x.ResultsPerPage
+	}
+	return 0
+}
+
+type GetCommentsByPostIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Content       string                 `protobuf:"bytes,1,opt,name=content,proto3" json:"content,omitempty"`
+	IsPinned      bool                   `protobuf:"varint,2,opt,name=is_pinned,json=isPinned,proto3" json:"is_pinned,omitempty"`
+	CommentId     int64                  `protobuf:"varint,3,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+	AuthorId      int64                  `protobuf:"varint,4,opt,name=author_id,json=authorId,proto3" json:"author_id,omitempty"`
+	Rating        []string               `protobuf:"bytes,5,rep,name=rating,proto3" json:"rating,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetCommentsByPostIdResponse) Reset() {
+	*x = GetCommentsByPostIdResponse{}
+	mi := &file_proto_post_post_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetCommentsByPostIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCommentsByPostIdResponse) ProtoMessage() {}
+
+func (x *GetCommentsByPostIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_post_post_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCommentsByPostIdResponse.ProtoReflect.Descriptor instead.
+func (*GetCommentsByPostIdResponse) Descriptor() ([]byte, []int) {
+	return file_proto_post_post_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *GetCommentsByPostIdResponse) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *GetCommentsByPostIdResponse) GetIsPinned() bool {
+	if x != nil {
+		return x.IsPinned
+	}
+	return false
+}
+
+func (x *GetCommentsByPostIdResponse) GetCommentId() int64 {
+	if x != nil {
+		return x.CommentId
+	}
+	return 0
+}
+
+func (x *GetCommentsByPostIdResponse) GetAuthorId() int64 {
+	if x != nil {
+		return x.AuthorId
+	}
+	return 0
+}
+
+func (x *GetCommentsByPostIdResponse) GetRating() []string {
+	if x != nil {
+		return x.Rating
+	}
+	return nil
+}
+
+type AddCommentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Content       string                 `protobuf:"bytes,1,opt,name=content,proto3" json:"content,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddCommentRequest) Reset() {
+	*x = AddCommentRequest{}
+	mi := &file_proto_post_post_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddCommentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddCommentRequest) ProtoMessage() {}
+
+func (x *AddCommentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_post_post_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddCommentRequest.ProtoReflect.Descriptor instead.
+func (*AddCommentRequest) Descriptor() ([]byte, []int) {
+	return file_proto_post_post_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *AddCommentRequest) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+type AddCommentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CommentId     int64                  `protobuf:"varint,1,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddCommentResponse) Reset() {
+	*x = AddCommentResponse{}
+	mi := &file_proto_post_post_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddCommentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddCommentResponse) ProtoMessage() {}
+
+func (x *AddCommentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_post_post_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddCommentResponse.ProtoReflect.Descriptor instead.
+func (*AddCommentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_post_post_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *AddCommentResponse) GetCommentId() int64 {
+	if x != nil {
+		return x.CommentId
+	}
+	return 0
+}
+
+type ChangeCommentRatingRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CommentId     int64                  `protobuf:"varint,1,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChangeCommentRatingRequest) Reset() {
+	*x = ChangeCommentRatingRequest{}
+	mi := &file_proto_post_post_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChangeCommentRatingRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChangeCommentRatingRequest) ProtoMessage() {}
+
+func (x *ChangeCommentRatingRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_post_post_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChangeCommentRatingRequest.ProtoReflect.Descriptor instead.
+func (*ChangeCommentRatingRequest) Descriptor() ([]byte, []int) {
+	return file_proto_post_post_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *ChangeCommentRatingRequest) GetCommentId() int64 {
+	if x != nil {
+		return x.CommentId
+	}
+	return 0
+}
+
+type ChangeCommentRatingResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Rating        []string               `protobuf:"bytes,1,rep,name=rating,proto3" json:"rating,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChangeCommentRatingResponse) Reset() {
+	*x = ChangeCommentRatingResponse{}
+	mi := &file_proto_post_post_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChangeCommentRatingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChangeCommentRatingResponse) ProtoMessage() {}
+
+func (x *ChangeCommentRatingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_post_post_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChangeCommentRatingResponse.ProtoReflect.Descriptor instead.
+func (*ChangeCommentRatingResponse) Descriptor() ([]byte, []int) {
+	return file_proto_post_post_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *ChangeCommentRatingResponse) GetRating() []string {
+	if x != nil {
+		return x.Rating
+	}
+	return nil
+}
+
+type PinCommentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CommentId     int64                  `protobuf:"varint,1,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PinCommentRequest) Reset() {
+	*x = PinCommentRequest{}
+	mi := &file_proto_post_post_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PinCommentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PinCommentRequest) ProtoMessage() {}
+
+func (x *PinCommentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_post_post_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PinCommentRequest.ProtoReflect.Descriptor instead.
+func (*PinCommentRequest) Descriptor() ([]byte, []int) {
+	return file_proto_post_post_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *PinCommentRequest) GetCommentId() int64 {
+	if x != nil {
+		return x.CommentId
+	}
+	return 0
+}
+
+type PinCommentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CommentId     int64                  `protobuf:"varint,1,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PinCommentResponse) Reset() {
+	*x = PinCommentResponse{}
+	mi := &file_proto_post_post_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PinCommentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PinCommentResponse) ProtoMessage() {}
+
+func (x *PinCommentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_post_post_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PinCommentResponse.ProtoReflect.Descriptor instead.
+func (*PinCommentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_post_post_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *PinCommentResponse) GetCommentId() int64 {
+	if x != nil {
+		return x.CommentId
+	}
+	return 0
+}
+
+type DeleteCommentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CommentId     int64                  `protobuf:"varint,1,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteCommentRequest) Reset() {
+	*x = DeleteCommentRequest{}
+	mi := &file_proto_post_post_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteCommentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteCommentRequest) ProtoMessage() {}
+
+func (x *DeleteCommentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_post_post_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteCommentRequest.ProtoReflect.Descriptor instead.
+func (*DeleteCommentRequest) Descriptor() ([]byte, []int) {
+	return file_proto_post_post_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *DeleteCommentRequest) GetCommentId() int64 {
+	if x != nil {
+		return x.CommentId
+	}
+	return 0
+}
+
+type DeleteCommentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CommentId     int64                  `protobuf:"varint,1,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteCommentResponse) Reset() {
+	*x = DeleteCommentResponse{}
+	mi := &file_proto_post_post_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteCommentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteCommentResponse) ProtoMessage() {}
+
+func (x *DeleteCommentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_post_post_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteCommentResponse.ProtoReflect.Descriptor instead.
+func (*DeleteCommentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_post_post_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *DeleteCommentResponse) GetCommentId() int64 {
+	if x != nil {
+		return x.CommentId
+	}
+	return 0
+}
+
 var File_proto_post_post_proto protoreflect.FileDescriptor
 
 const file_proto_post_post_proto_rawDesc = "" +
 	"\n" +
-	"\x15proto/post/post.proto\"\x14\n" +
-	"\x12GetAllPostsRequest\"\x8e\x01\n" +
+	"\x15proto/post/post.proto\"_\n" +
+	"\x12GetAllPostsRequest\x12\x1f\n" +
+	"\vpage_number\x18\x02 \x01(\x05R\n" +
+	"pageNumber\x12(\n" +
+	"\x10results_per_page\x18\x03 \x01(\x05R\x0eresultsPerPage\"\x8e\x01\n" +
 	"\x13GetAllPostsResponse\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x12\x16\n" +
@@ -805,7 +1312,41 @@ const file_proto_post_post_proto_rawDesc = "" +
 	"\x11DeletePostRequest\x12\x17\n" +
 	"\apost_id\x18\x01 \x01(\x03R\x06postId\"-\n" +
 	"\x12DeletePostResponse\x12\x17\n" +
-	"\apost_id\x18\x01 \x01(\x03R\x06postId2\xa1\x03\n" +
+	"\apost_id\x18\x01 \x01(\x03R\x06postId\"\x80\x01\n" +
+	"\x1aGetCommentsByPostIdRequest\x12\x17\n" +
+	"\apost_id\x18\x01 \x01(\x03R\x06postId\x12\x1f\n" +
+	"\vpage_number\x18\x02 \x01(\x05R\n" +
+	"pageNumber\x12(\n" +
+	"\x10results_per_page\x18\x03 \x01(\x05R\x0eresultsPerPage\"\xa8\x01\n" +
+	"\x1bGetCommentsByPostIdResponse\x12\x18\n" +
+	"\acontent\x18\x01 \x01(\tR\acontent\x12\x1b\n" +
+	"\tis_pinned\x18\x02 \x01(\bR\bisPinned\x12\x1d\n" +
+	"\n" +
+	"comment_id\x18\x03 \x01(\x03R\tcommentId\x12\x1b\n" +
+	"\tauthor_id\x18\x04 \x01(\x03R\bauthorId\x12\x16\n" +
+	"\x06rating\x18\x05 \x03(\tR\x06rating\"-\n" +
+	"\x11AddCommentRequest\x12\x18\n" +
+	"\acontent\x18\x01 \x01(\tR\acontent\"3\n" +
+	"\x12AddCommentResponse\x12\x1d\n" +
+	"\n" +
+	"comment_id\x18\x01 \x01(\x03R\tcommentId\";\n" +
+	"\x1aChangeCommentRatingRequest\x12\x1d\n" +
+	"\n" +
+	"comment_id\x18\x01 \x01(\x03R\tcommentId\"5\n" +
+	"\x1bChangeCommentRatingResponse\x12\x16\n" +
+	"\x06rating\x18\x01 \x03(\tR\x06rating\"2\n" +
+	"\x11PinCommentRequest\x12\x1d\n" +
+	"\n" +
+	"comment_id\x18\x01 \x01(\x03R\tcommentId\"3\n" +
+	"\x12PinCommentResponse\x12\x1d\n" +
+	"\n" +
+	"comment_id\x18\x01 \x01(\x03R\tcommentId\"5\n" +
+	"\x14DeleteCommentRequest\x12\x1d\n" +
+	"\n" +
+	"comment_id\x18\x01 \x01(\x03R\tcommentId\"6\n" +
+	"\x15DeleteCommentResponse\x12\x1d\n" +
+	"\n" +
+	"comment_id\x18\x01 \x01(\x03R\tcommentId2\xf5\x05\n" +
 	"\x04Post\x12:\n" +
 	"\vGetAllPosts\x12\x13.GetAllPostsRequest\x1a\x14.GetAllPostsResponse0\x01\x128\n" +
 	"\vGetPostById\x12\x13.GetPostByIdRequest\x1a\x14.GetPostByIdResponse\x12@\n" +
@@ -814,7 +1355,14 @@ const file_proto_post_post_proto_rawDesc = "" +
 	"\aAddPost\x12\x0f.AddPostRequest\x1a\x10.AddPostResponse\x12G\n" +
 	"\x10ChangePostRating\x12\x18.ChangePostRatingRequest\x1a\x19.ChangePostRatingResponse\x125\n" +
 	"\n" +
-	"DeletePost\x12\x12.DeletePostRequest\x1a\x13.DeletePostResponseB\aZ\x05/postb\x06proto3"
+	"DeletePost\x12\x12.DeletePostRequest\x1a\x13.DeletePostResponse\x12R\n" +
+	"\x13GetCommentsByPostId\x12\x1b.GetCommentsByPostIdRequest\x1a\x1c.GetCommentsByPostIdResponse0\x01\x125\n" +
+	"\n" +
+	"AddComment\x12\x12.AddCommentRequest\x1a\x13.AddCommentResponse\x12P\n" +
+	"\x13ChangeCommentRating\x12\x1b.ChangeCommentRatingRequest\x1a\x1c.ChangeCommentRatingResponse\x125\n" +
+	"\n" +
+	"PinComment\x12\x12.PinCommentRequest\x1a\x13.PinCommentResponse\x12>\n" +
+	"\rDeleteComment\x12\x15.DeleteCommentRequest\x1a\x16.DeleteCommentResponseB\aZ\x05/postb\x06proto3"
 
 var (
 	file_proto_post_post_proto_rawDescOnce sync.Once
@@ -828,22 +1376,32 @@ func file_proto_post_post_proto_rawDescGZIP() []byte {
 	return file_proto_post_post_proto_rawDescData
 }
 
-var file_proto_post_post_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_proto_post_post_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_proto_post_post_proto_goTypes = []any{
-	(*GetAllPostsRequest)(nil),       // 0: GetAllPostsRequest
-	(*GetAllPostsResponse)(nil),      // 1: GetAllPostsResponse
-	(*GetPostByIdRequest)(nil),       // 2: GetPostByIdRequest
-	(*GetPostByIdResponse)(nil),      // 3: GetPostByIdResponse
-	(*GetPostByUserRequest)(nil),     // 4: GetPostByUserRequest
-	(*GetPostByUserResponse)(nil),    // 5: GetPostByUserResponse
-	(*FindPostRequest)(nil),          // 6: FindPostRequest
-	(*FindPostResponse)(nil),         // 7: FindPostResponse
-	(*AddPostRequest)(nil),           // 8: AddPostRequest
-	(*AddPostResponse)(nil),          // 9: AddPostResponse
-	(*ChangePostRatingRequest)(nil),  // 10: ChangePostRatingRequest
-	(*ChangePostRatingResponse)(nil), // 11: ChangePostRatingResponse
-	(*DeletePostRequest)(nil),        // 12: DeletePostRequest
-	(*DeletePostResponse)(nil),       // 13: DeletePostResponse
+	(*GetAllPostsRequest)(nil),          // 0: GetAllPostsRequest
+	(*GetAllPostsResponse)(nil),         // 1: GetAllPostsResponse
+	(*GetPostByIdRequest)(nil),          // 2: GetPostByIdRequest
+	(*GetPostByIdResponse)(nil),         // 3: GetPostByIdResponse
+	(*GetPostByUserRequest)(nil),        // 4: GetPostByUserRequest
+	(*GetPostByUserResponse)(nil),       // 5: GetPostByUserResponse
+	(*FindPostRequest)(nil),             // 6: FindPostRequest
+	(*FindPostResponse)(nil),            // 7: FindPostResponse
+	(*AddPostRequest)(nil),              // 8: AddPostRequest
+	(*AddPostResponse)(nil),             // 9: AddPostResponse
+	(*ChangePostRatingRequest)(nil),     // 10: ChangePostRatingRequest
+	(*ChangePostRatingResponse)(nil),    // 11: ChangePostRatingResponse
+	(*DeletePostRequest)(nil),           // 12: DeletePostRequest
+	(*DeletePostResponse)(nil),          // 13: DeletePostResponse
+	(*GetCommentsByPostIdRequest)(nil),  // 14: GetCommentsByPostIdRequest
+	(*GetCommentsByPostIdResponse)(nil), // 15: GetCommentsByPostIdResponse
+	(*AddCommentRequest)(nil),           // 16: AddCommentRequest
+	(*AddCommentResponse)(nil),          // 17: AddCommentResponse
+	(*ChangeCommentRatingRequest)(nil),  // 18: ChangeCommentRatingRequest
+	(*ChangeCommentRatingResponse)(nil), // 19: ChangeCommentRatingResponse
+	(*PinCommentRequest)(nil),           // 20: PinCommentRequest
+	(*PinCommentResponse)(nil),          // 21: PinCommentResponse
+	(*DeleteCommentRequest)(nil),        // 22: DeleteCommentRequest
+	(*DeleteCommentResponse)(nil),       // 23: DeleteCommentResponse
 }
 var file_proto_post_post_proto_depIdxs = []int32{
 	0,  // 0: Post.GetAllPosts:input_type -> GetAllPostsRequest
@@ -853,15 +1411,25 @@ var file_proto_post_post_proto_depIdxs = []int32{
 	8,  // 4: Post.AddPost:input_type -> AddPostRequest
 	10, // 5: Post.ChangePostRating:input_type -> ChangePostRatingRequest
 	12, // 6: Post.DeletePost:input_type -> DeletePostRequest
-	1,  // 7: Post.GetAllPosts:output_type -> GetAllPostsResponse
-	3,  // 8: Post.GetPostById:output_type -> GetPostByIdResponse
-	5,  // 9: Post.GetPostByUser:output_type -> GetPostByUserResponse
-	7,  // 10: Post.FindPost:output_type -> FindPostResponse
-	9,  // 11: Post.AddPost:output_type -> AddPostResponse
-	11, // 12: Post.ChangePostRating:output_type -> ChangePostRatingResponse
-	13, // 13: Post.DeletePost:output_type -> DeletePostResponse
-	7,  // [7:14] is the sub-list for method output_type
-	0,  // [0:7] is the sub-list for method input_type
+	14, // 7: Post.GetCommentsByPostId:input_type -> GetCommentsByPostIdRequest
+	16, // 8: Post.AddComment:input_type -> AddCommentRequest
+	18, // 9: Post.ChangeCommentRating:input_type -> ChangeCommentRatingRequest
+	20, // 10: Post.PinComment:input_type -> PinCommentRequest
+	22, // 11: Post.DeleteComment:input_type -> DeleteCommentRequest
+	1,  // 12: Post.GetAllPosts:output_type -> GetAllPostsResponse
+	3,  // 13: Post.GetPostById:output_type -> GetPostByIdResponse
+	5,  // 14: Post.GetPostByUser:output_type -> GetPostByUserResponse
+	7,  // 15: Post.FindPost:output_type -> FindPostResponse
+	9,  // 16: Post.AddPost:output_type -> AddPostResponse
+	11, // 17: Post.ChangePostRating:output_type -> ChangePostRatingResponse
+	13, // 18: Post.DeletePost:output_type -> DeletePostResponse
+	15, // 19: Post.GetCommentsByPostId:output_type -> GetCommentsByPostIdResponse
+	17, // 20: Post.AddComment:output_type -> AddCommentResponse
+	19, // 21: Post.ChangeCommentRating:output_type -> ChangeCommentRatingResponse
+	21, // 22: Post.PinComment:output_type -> PinCommentResponse
+	23, // 23: Post.DeleteComment:output_type -> DeleteCommentResponse
+	12, // [12:24] is the sub-list for method output_type
+	0,  // [0:12] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -878,7 +1446,7 @@ func file_proto_post_post_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_post_post_proto_rawDesc), len(file_proto_post_post_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
