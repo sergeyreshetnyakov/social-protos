@@ -22,6 +22,7 @@ const (
 	User_Login_FullMethodName                    = "/User/Login"
 	User_Register_FullMethodName                 = "/User/Register"
 	User_GetUserByUsername_FullMethodName        = "/User/GetUserByUsername"
+	User_GetUserById_FullMethodName              = "/User/GetUserById"
 	User_FindUser_FullMethodName                 = "/User/FindUser"
 	User_UpdateProfileImage_FullMethodName       = "/User/UpdateProfileImage"
 	User_UpdateProfileDescription_FullMethodName = "/User/UpdateProfileDescription"
@@ -35,6 +36,7 @@ type UserClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	GetUserByUsername(ctx context.Context, in *GetUserByUsernameRequest, opts ...grpc.CallOption) (*GetUserByUsernameResponse, error)
+	GetUserById(ctx context.Context, in *GetUserByIdRequest, opts ...grpc.CallOption) (*GetUserByIdResponse, error)
 	FindUser(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[FindUserRequest, FindUserResponse], error)
 	UpdateProfileImage(ctx context.Context, in *UpdateProfileImageRequest, opts ...grpc.CallOption) (*UpdateProfileImageResponse, error)
 	UpdateProfileDescription(ctx context.Context, in *UpdateProfileDescriptionRequest, opts ...grpc.CallOption) (*UpdateProfileDescriptionResponse, error)
@@ -73,6 +75,16 @@ func (c *userClient) GetUserByUsername(ctx context.Context, in *GetUserByUsernam
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserByUsernameResponse)
 	err := c.cc.Invoke(ctx, User_GetUserByUsername_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetUserById(ctx context.Context, in *GetUserByIdRequest, opts ...grpc.CallOption) (*GetUserByIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserByIdResponse)
+	err := c.cc.Invoke(ctx, User_GetUserById_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -129,6 +141,7 @@ type UserServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	GetUserByUsername(context.Context, *GetUserByUsernameRequest) (*GetUserByUsernameResponse, error)
+	GetUserById(context.Context, *GetUserByIdRequest) (*GetUserByIdResponse, error)
 	FindUser(grpc.BidiStreamingServer[FindUserRequest, FindUserResponse]) error
 	UpdateProfileImage(context.Context, *UpdateProfileImageRequest) (*UpdateProfileImageResponse, error)
 	UpdateProfileDescription(context.Context, *UpdateProfileDescriptionRequest) (*UpdateProfileDescriptionResponse, error)
@@ -151,6 +164,9 @@ func (UnimplementedUserServer) Register(context.Context, *RegisterRequest) (*Reg
 }
 func (UnimplementedUserServer) GetUserByUsername(context.Context, *GetUserByUsernameRequest) (*GetUserByUsernameResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserByUsername not implemented")
+}
+func (UnimplementedUserServer) GetUserById(context.Context, *GetUserByIdRequest) (*GetUserByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserById not implemented")
 }
 func (UnimplementedUserServer) FindUser(grpc.BidiStreamingServer[FindUserRequest, FindUserResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method FindUser not implemented")
@@ -239,6 +255,24 @@ func _User_GetUserByUsername_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetUserById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetUserById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetUserById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetUserById(ctx, req.(*GetUserByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_FindUser_Handler(srv interface{}, stream grpc.ServerStream) error {
 	return srv.(UserServer).FindUser(&grpc.GenericServerStream[FindUserRequest, FindUserResponse]{ServerStream: stream})
 }
@@ -318,6 +352,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserByUsername",
 			Handler:    _User_GetUserByUsername_Handler,
+		},
+		{
+			MethodName: "GetUserById",
+			Handler:    _User_GetUserById_Handler,
 		},
 		{
 			MethodName: "UpdateProfileImage",

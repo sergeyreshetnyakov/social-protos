@@ -5,6 +5,7 @@ service User {
     rpc Login (LoginRequest) returns (LoginResponse);
     rpc Register (RegisterRequest) returns (RegisterResponse);
     rpc GetUserByUsername (GetUserByUsernameRequest) returns (GetUserByUsernameResponse);
+    rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse);
     rpc FindUser (stream FindUserRequest) returns (stream FindUserResponse);
     rpc UpdateProfileImage (UpdateProfileImageRequest) returns (UpdateProfileImageResponse);
     rpc UpdateProfileDescription (UpdateProfileDescriptionRequest) returns (UpdateProfileDescriptionResponse);
@@ -44,6 +45,16 @@ message GetUserByUsernameRequest {
 }
 
 message GetUserByUsernameResponse {
+    string username = 1;
+    string description = 2;
+    Image profile_image = 3;
+}
+
+message GetUserByIdRequest {
+    int64 id = 1;
+}
+
+message GetUserByIdResponse {
     string username = 1;
     string description = 2;
     Image profile_image = 3;
