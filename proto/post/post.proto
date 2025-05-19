@@ -26,7 +26,7 @@ message GetAllPostsResponse {
     string content = 2;
     string author = 3;
     int64 post_id = 4;
-    repeated string rating = 5;
+    int32 rating  = 5;
 }
 
 message GetPostByIdRequest {
@@ -38,7 +38,7 @@ message GetPostByIdResponse {
     string content = 2;
     string author = 3;
     int64 post_id = 4;
-    repeated string rating = 5;
+    int32 rating = 5;
 }
 message GetPostByUserRequest {
     int64 user_id = 1;
@@ -49,7 +49,7 @@ message GetPostByUserResponse {
     string content = 2;
     string author = 3;
     int64 post_id = 4;
-    repeated string rating = 5;
+    int32 rating = 5;
 }
 
 message FindPostRequest {
@@ -77,7 +77,7 @@ message ChangePostRatingRequest {
 }
 
 message ChangePostRatingResponse {
-    repeated string rating = 1;
+    string username = 1;
 }
 
 message DeletePostRequest {
@@ -99,7 +99,7 @@ message GetCommentsByPostIdResponse {
     bool is_pinned = 2;
     int64 comment_id = 3;
     int64 author_id = 4;
-    repeated string rating = 5;
+    int32 rating = 5;
 }
 
 message AddCommentRequest {
@@ -115,7 +115,7 @@ message ChangeCommentRatingRequest {
 }
 
 message ChangeCommentRatingResponse {
-    repeated string rating = 1;
+    int32 rating = 1;
 }
 
 message PinCommentRequest {
