@@ -7,4 +7,4 @@ tasks:
       PROTONAME: "{{index .MATCH 0}}"
     aliases: ["gen"]
     cmds:
-      - protoc --go_out=gen/{{.PROTONAME}} --go_opt=paths=source_relative --go-grpc_out=gen/{{.PROTONAME}} proto/{{.PROTONAME}}/{{.PROTONAME}}.proto
+      - protoc --go_out=gen/ --go_opt=paths=source_relative --go-grpc_out=gen/ proto/{{.PROTONAME}}/{{.PROTONAME}}.proto

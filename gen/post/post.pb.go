@@ -79,7 +79,7 @@ type GetAllPostsResponse struct {
 	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
 	Author        string                 `protobuf:"bytes,3,opt,name=author,proto3" json:"author,omitempty"`
 	PostId        int64                  `protobuf:"varint,4,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
-	Rating        []string               `protobuf:"bytes,5,rep,name=rating,proto3" json:"rating,omitempty"`
+	Rating        int32                  `protobuf:"varint,5,opt,name=rating,proto3" json:"rating,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -142,11 +142,11 @@ func (x *GetAllPostsResponse) GetPostId() int64 {
 	return 0
 }
 
-func (x *GetAllPostsResponse) GetRating() []string {
+func (x *GetAllPostsResponse) GetRating() int32 {
 	if x != nil {
 		return x.Rating
 	}
-	return nil
+	return 0
 }
 
 type GetPostByIdRequest struct {
@@ -199,7 +199,7 @@ type GetPostByIdResponse struct {
 	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
 	Author        string                 `protobuf:"bytes,3,opt,name=author,proto3" json:"author,omitempty"`
 	PostId        int64                  `protobuf:"varint,4,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
-	Rating        []string               `protobuf:"bytes,5,rep,name=rating,proto3" json:"rating,omitempty"`
+	Rating        int32                  `protobuf:"varint,5,opt,name=rating,proto3" json:"rating,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -262,11 +262,11 @@ func (x *GetPostByIdResponse) GetPostId() int64 {
 	return 0
 }
 
-func (x *GetPostByIdResponse) GetRating() []string {
+func (x *GetPostByIdResponse) GetRating() int32 {
 	if x != nil {
 		return x.Rating
 	}
-	return nil
+	return 0
 }
 
 type GetPostByUserRequest struct {
@@ -319,7 +319,7 @@ type GetPostByUserResponse struct {
 	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
 	Author        string                 `protobuf:"bytes,3,opt,name=author,proto3" json:"author,omitempty"`
 	PostId        int64                  `protobuf:"varint,4,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
-	Rating        []string               `protobuf:"bytes,5,rep,name=rating,proto3" json:"rating,omitempty"`
+	Rating        int32                  `protobuf:"varint,5,opt,name=rating,proto3" json:"rating,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -382,11 +382,11 @@ func (x *GetPostByUserResponse) GetPostId() int64 {
 	return 0
 }
 
-func (x *GetPostByUserResponse) GetRating() []string {
+func (x *GetPostByUserResponse) GetRating() int32 {
 	if x != nil {
 		return x.Rating
 	}
-	return nil
+	return 0
 }
 
 type FindPostRequest struct {
@@ -643,7 +643,7 @@ func (x *ChangePostRatingRequest) GetPostId() int64 {
 
 type ChangePostRatingResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Rating        []string               `protobuf:"bytes,1,rep,name=rating,proto3" json:"rating,omitempty"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -678,11 +678,11 @@ func (*ChangePostRatingResponse) Descriptor() ([]byte, []int) {
 	return file_proto_post_post_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *ChangePostRatingResponse) GetRating() []string {
+func (x *ChangePostRatingResponse) GetUsername() string {
 	if x != nil {
-		return x.Rating
+		return x.Username
 	}
-	return nil
+	return ""
 }
 
 type DeletePostRequest struct {
@@ -839,7 +839,7 @@ type GetCommentsByPostIdResponse struct {
 	IsPinned      bool                   `protobuf:"varint,2,opt,name=is_pinned,json=isPinned,proto3" json:"is_pinned,omitempty"`
 	CommentId     int64                  `protobuf:"varint,3,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
 	AuthorId      int64                  `protobuf:"varint,4,opt,name=author_id,json=authorId,proto3" json:"author_id,omitempty"`
-	Rating        []string               `protobuf:"bytes,5,rep,name=rating,proto3" json:"rating,omitempty"`
+	Rating        int32                  `protobuf:"varint,5,opt,name=rating,proto3" json:"rating,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -902,11 +902,11 @@ func (x *GetCommentsByPostIdResponse) GetAuthorId() int64 {
 	return 0
 }
 
-func (x *GetCommentsByPostIdResponse) GetRating() []string {
+func (x *GetCommentsByPostIdResponse) GetRating() int32 {
 	if x != nil {
 		return x.Rating
 	}
-	return nil
+	return 0
 }
 
 type AddCommentRequest struct {
@@ -1043,7 +1043,7 @@ func (x *ChangeCommentRatingRequest) GetCommentId() int64 {
 
 type ChangeCommentRatingResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Rating        []string               `protobuf:"bytes,1,rep,name=rating,proto3" json:"rating,omitempty"`
+	Rating        int32                  `protobuf:"varint,1,opt,name=rating,proto3" json:"rating,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1078,11 +1078,11 @@ func (*ChangeCommentRatingResponse) Descriptor() ([]byte, []int) {
 	return file_proto_post_post_proto_rawDescGZIP(), []int{19}
 }
 
-func (x *ChangeCommentRatingResponse) GetRating() []string {
+func (x *ChangeCommentRatingResponse) GetRating() int32 {
 	if x != nil {
 		return x.Rating
 	}
-	return nil
+	return 0
 }
 
 type PinCommentRequest struct {
@@ -1275,7 +1275,7 @@ const file_proto_post_post_proto_rawDesc = "" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x12\x16\n" +
 	"\x06author\x18\x03 \x01(\tR\x06author\x12\x17\n" +
 	"\apost_id\x18\x04 \x01(\x03R\x06postId\x12\x16\n" +
-	"\x06rating\x18\x05 \x03(\tR\x06rating\"-\n" +
+	"\x06rating\x18\x05 \x01(\x05R\x06rating\"-\n" +
 	"\x12GetPostByIdRequest\x12\x17\n" +
 	"\apost_id\x18\x01 \x01(\x03R\x06postId\"\x8e\x01\n" +
 	"\x13GetPostByIdResponse\x12\x14\n" +
@@ -1283,7 +1283,7 @@ const file_proto_post_post_proto_rawDesc = "" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x12\x16\n" +
 	"\x06author\x18\x03 \x01(\tR\x06author\x12\x17\n" +
 	"\apost_id\x18\x04 \x01(\x03R\x06postId\x12\x16\n" +
-	"\x06rating\x18\x05 \x03(\tR\x06rating\"/\n" +
+	"\x06rating\x18\x05 \x01(\x05R\x06rating\"/\n" +
 	"\x14GetPostByUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\x90\x01\n" +
 	"\x15GetPostByUserResponse\x12\x14\n" +
@@ -1291,7 +1291,7 @@ const file_proto_post_post_proto_rawDesc = "" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x12\x16\n" +
 	"\x06author\x18\x03 \x01(\tR\x06author\x12\x17\n" +
 	"\apost_id\x18\x04 \x01(\x03R\x06postId\x12\x16\n" +
-	"\x06rating\x18\x05 \x03(\tR\x06rating\"r\n" +
+	"\x06rating\x18\x05 \x01(\x05R\x06rating\"r\n" +
 	"\x0fFindPostRequest\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12\x1f\n" +
 	"\vpage_number\x18\x02 \x01(\x05R\n" +
@@ -1306,9 +1306,9 @@ const file_proto_post_post_proto_rawDesc = "" +
 	"\x0fAddPostResponse\x12\x17\n" +
 	"\apost_id\x18\x01 \x01(\x03R\x06postId\"2\n" +
 	"\x17ChangePostRatingRequest\x12\x17\n" +
-	"\apost_id\x18\x01 \x01(\x03R\x06postId\"2\n" +
-	"\x18ChangePostRatingResponse\x12\x16\n" +
-	"\x06rating\x18\x01 \x03(\tR\x06rating\",\n" +
+	"\apost_id\x18\x01 \x01(\x03R\x06postId\"6\n" +
+	"\x18ChangePostRatingResponse\x12\x1a\n" +
+	"\busername\x18\x01 \x01(\tR\busername\",\n" +
 	"\x11DeletePostRequest\x12\x17\n" +
 	"\apost_id\x18\x01 \x01(\x03R\x06postId\"-\n" +
 	"\x12DeletePostResponse\x12\x17\n" +
@@ -1324,7 +1324,7 @@ const file_proto_post_post_proto_rawDesc = "" +
 	"\n" +
 	"comment_id\x18\x03 \x01(\x03R\tcommentId\x12\x1b\n" +
 	"\tauthor_id\x18\x04 \x01(\x03R\bauthorId\x12\x16\n" +
-	"\x06rating\x18\x05 \x03(\tR\x06rating\"-\n" +
+	"\x06rating\x18\x05 \x01(\x05R\x06rating\"-\n" +
 	"\x11AddCommentRequest\x12\x18\n" +
 	"\acontent\x18\x01 \x01(\tR\acontent\"3\n" +
 	"\x12AddCommentResponse\x12\x1d\n" +
@@ -1334,7 +1334,7 @@ const file_proto_post_post_proto_rawDesc = "" +
 	"\n" +
 	"comment_id\x18\x01 \x01(\x03R\tcommentId\"5\n" +
 	"\x1bChangeCommentRatingResponse\x12\x16\n" +
-	"\x06rating\x18\x01 \x03(\tR\x06rating\"2\n" +
+	"\x06rating\x18\x01 \x01(\x05R\x06rating\"2\n" +
 	"\x11PinCommentRequest\x12\x1d\n" +
 	"\n" +
 	"comment_id\x18\x01 \x01(\x03R\tcommentId\"3\n" +
