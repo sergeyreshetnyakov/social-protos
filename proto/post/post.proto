@@ -77,7 +77,7 @@ message ChangePostRatingRequest {
 }
 
 message ChangePostRatingResponse {
-    string username = 1;
+    int32 rating = 1;
 }
 
 message DeletePostRequest {
