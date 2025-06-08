@@ -16,6 +16,11 @@ service Post {
     rpc DeleteComment (DeleteCommentRequest) returns (DeleteCommentResponse);
 }
 
+message Timestamp {
+  int64 seconds = 1;
+  int32 nanos = 2;
+}
+
 message GetAllPostsRequest {
     int32 page_number = 2;
     int32 results_per_page = 3;
@@ -27,6 +32,7 @@ message GetAllPostsResponse {
     string author = 3;
     int64 post_id = 4;
     int32 rating  = 5;
+    Timestamp publication_date = 6;
 }
 
 message GetPostByIdRequest {
@@ -39,6 +45,7 @@ message GetPostByIdResponse {
     string author = 3;
     int64 post_id = 4;
     int32 rating = 5;
+    Timestamp publication_date = 6;
 }
 message GetPostByUserRequest {
     int64 user_id = 1;
@@ -50,6 +57,7 @@ message GetPostByUserResponse {
     string author = 3;
     int64 post_id = 4;
     int32 rating = 5;
+    Timestamp publication_date = 6;
 }
 
 message FindPostRequest {
@@ -66,6 +74,7 @@ message FindPostResponse {
 message AddPostRequest {
     string title = 1;
     string content = 2;
+    Timestamp publication_date = 6;
 }
 
 message AddPostResponse {
@@ -100,10 +109,12 @@ message GetCommentsByPostIdResponse {
     int64 comment_id = 3;
     int64 author_id = 4;
     int32 rating = 5;
+    Timestamp publication_date = 6;
 }
 
 message AddCommentRequest {
     string content = 1;
+    Timestamp publication_date = 6;
 }
 
 message AddCommentResponse {
