@@ -527,8 +527,8 @@ func (x *FindPostRequest) GetResultsPerPage() int32 {
 
 type FindPostResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Title         []string               `protobuf:"bytes,1,rep,name=title,proto3" json:"title,omitempty"`
-	PostId        []int64                `protobuf:"varint,2,rep,packed,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
+	Title         string                 `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
+	PostId        int64                  `protobuf:"varint,2,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -563,18 +563,18 @@ func (*FindPostResponse) Descriptor() ([]byte, []int) {
 	return file_proto_post_post_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *FindPostResponse) GetTitle() []string {
+func (x *FindPostResponse) GetTitle() string {
 	if x != nil {
 		return x.Title
 	}
-	return nil
+	return ""
 }
 
-func (x *FindPostResponse) GetPostId() []int64 {
+func (x *FindPostResponse) GetPostId() int64 {
 	if x != nil {
 		return x.PostId
 	}
-	return nil
+	return 0
 }
 
 type AddPostRequest struct {
@@ -1415,8 +1415,8 @@ const file_proto_post_post_proto_rawDesc = "" +
 	"pageNumber\x12(\n" +
 	"\x10results_per_page\x18\x03 \x01(\x05R\x0eresultsPerPage\"A\n" +
 	"\x10FindPostResponse\x12\x14\n" +
-	"\x05title\x18\x01 \x03(\tR\x05title\x12\x17\n" +
-	"\apost_id\x18\x02 \x03(\x03R\x06postId\"w\n" +
+	"\x05title\x18\x01 \x01(\tR\x05title\x12\x17\n" +
+	"\apost_id\x18\x02 \x01(\x03R\x06postId\"w\n" +
 	"\x0eAddPostRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x125\n" +
